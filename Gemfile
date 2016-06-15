@@ -50,6 +50,7 @@ end
 # Additions beyond generated
 
 gem 'sass'
+gem 'bower-rails'
 
 group :test, :development do
   gem "rspec-rails"
