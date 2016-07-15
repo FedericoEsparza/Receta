@@ -1,3 +1,16 @@
+#= require support/bind-poly
+#= require application
+#= require angular-mocks/angular-mocks
+beforeEach ->
+  jasmine.addMatchers toEqualData: (util, customEqualityTesters) ->
+    {
+      compare: (actual, expected) ->
+        result = {}
+        result.pass = angular.equals(actual, expected)
+        result
+    }
+
+
 # Teaspoon includes some support files, but you can use anything from your own support path too.
 # require support/jasmine-jquery-1.7.0
 # require support/jasmine-jquery-2.0.0
