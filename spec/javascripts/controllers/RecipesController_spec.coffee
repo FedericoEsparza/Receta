@@ -5,13 +5,23 @@ describe "RecipesController", ->
   routeParams  = null
   resource     = null
 
-  setupController =(keywords)->
-    inject(($location, $routeParams, $rootScope, $resource, $controller)->
+  # access injected service later
+  httpBackend  = null
+
+  setupController = (keywords,results)->
+    inject(($location, $routeParams, $rootScope, $resource, $httpBackend, $controller)->
       scope       = $rootScope.$new()
       location    = $location
       resource    = $resource
       routeParams = $routeParams
       routeParams.keywords = keywords
+
+      # capture the injected service
+      httpBackend = $httpBackend 
+
+      if results
+        request = new RegExp("\/recipes.*keywords=#{keywords}")
+        httpBackend.expectGET(request).respond(results)
 
       ctrl        = $controller('RecipesController',
                                 $scope: scope
