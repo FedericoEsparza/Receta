@@ -28,3 +28,16 @@ describe "RecipeController", ->
     httpBackend.verifyNoOutstandingExpectation()
     httpBackend.verifyNoOutstandingRequest()
 
+  describe 'controller initialization', ->
+    describe 'recipe is found', ->
+      beforeEach(setupController())
+      it 'loads the given recipe', ->
+        httpBackend.flush()
+        expect(scope.recipe).toEqualData(fakeRecipe)
+    describe 'recipe is not found', ->
+      beforeEach(setupController(false))
+      it 'loads the given recipe', ->
+        httpBackend.flush()
+        expect(scope.recipe).toBe(null)
+        # what else?!
+
