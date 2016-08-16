@@ -3,5 +3,10 @@ controllers.controller("RecipeController", [ '$scope', '$routeParams', '$resourc
   ($scope,$routeParams,$resource)->
     Recipe = $resource('/recipes/:recipeId', { recipeId: "@id", format: 'json' })
 
+    Recipe.get({recipeId: $routeParams.recipeId},
+      ( (recipe)-> $scope.recipe = recipe ),
+      ( (httpResponse)-> $scope.recipe = null)
+    )
+
 ])
 
